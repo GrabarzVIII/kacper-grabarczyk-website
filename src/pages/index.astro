@@ -1,0 +1,292 @@
+---
+import { getCollection } from 'astro:content';
+import ArticleCard from '../components/ArticleCard.astro';
+import Button from '../components/Button.astro';
+import Hero from '../components/Hero.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PageLayout from '../layouts/PageLayout.astro';
+
+const posts = (await getCollection('blog'))
+	.filter((post) => !post.data.draft)
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+	.slice(0, 3);
+
+const projects = (await getCollection('projects'))
+	.filter((project) => !project.data.draft)
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+	.slice(0, 3);
+---
+
+<PageLayout title="Kacper Grabarczyk | Data Specialist" description="Portfolio, blog techniczny i wizytówka Kacpera Grabarczyka — analityka danych, inżynieria danych i BI." pageName="Start">
+	<Hero />
+
+	<section class="section">
+		<div class="container">
+			<div class="split-intro">
+				<div>
+					<p class="section-kicker">Kim jestem</p>
+					<h2>Pomagam firmom zamieniać dane w decyzje.</h2>
+				</div>
+				<p>
+					Jestem Kacper Grabarczyk, data specialist z zainteresowaniem do analityki, inżynierii danych,
+					SQL, Python i visual storytelling. Na tej stronie prezentuję swoje zainteresowania, realizacje,
+					wpisy techniczne i podejście do pracy z danymi.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container">
+			<div class="section-heading">
+				<p class="section-kicker">Specjalizacja</p>
+				<h2>Obszary, w których działam</h2>
+			</div>
+			<div class="pill-grid">
+				<div class="card info-card"><h3>Data Analysis</h3><p>Badanie danych, analizowanie trendów, budowanie wniosków i rekomendacji.</p></div>
+				<div class="card info-card"><h3>Data Engineering</h3><p>Tworzenie niezawodnych procesów ETL/ELT i struktur danych wspierających analitykę.</p></div>
+				<div class="card info-card"><h3>SQL</h3><p>Modelowanie, optymalizacja, analityka zapytań i rozwiązywanie problemów biznesowych na danych.</p></div>
+				<div class="card info-card"><h3>Python</h3><p>Automatyzacja, transformacje, przetwarzanie i narzędzia wspierające warstwę analityczną.</p></div>
+				<div class="card info-card"><h3>BI & Visualization</h3><p>Przygotowanie czytelnych dashboardów, raportów i storytelling data-driven.</p></div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container">
+			<div class="section-heading inline-heading">
+				<div>
+					<p class="section-kicker">Portfolio</p>
+					<h2>Wybrane projekty</h2>
+				</div>
+				<Button href="/portfolio" label="Zobacz więcej" variant="secondary" />
+			</div>
+			<div class="card-grid three-up">
+				{projects.map((project) => <ProjectCard project={project} />)}
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container">
+			<div class="section-heading inline-heading">
+				<div>
+					<p class="section-kicker">Blog</p>
+					<h2>Najnowsze wpisy</h2>
+				</div>
+				<Button href="/blog" label="Przejdź do bloga" variant="secondary" />
+			</div>
+			<div class="card-grid three-up">
+				{posts.map((post) => <ArticleCard post={post} />)}
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container youtube-callout card">
+			<div>
+				<p class="section-kicker">DaneDaneTech</p>
+				<h2>Technologia, dane i praktyka w jednym miejscu.</h2>
+			</div>
+			<p>
+				Na kanale DaneDaneTech dzielę się materiałami o SQL, Pythonie, BI, modelowaniu danych i pracy
+				z narzędziami analitycznymi. To miejsce dla osób, które chcą rozwijać swoje umiejętności w praktyce.
+			</p>
+			<Button href="https://www.youtube.com/@DaneDaneTech" label="Otwórz kanał" variant="secondary" external />
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container cta-row">
+			<div class="card cta-box">
+				<h3>Chcesz porozmawiać o danych?</h3>
+				<p>Jeśli potrzebujesz wsparcia w SQL, analityce, BI lub pipeline'ach danych — napisz.</p>
+				<Button href="/kontakt" label="Skontaktuj się" />
+			</div>
+			<div class="card cta-box">
+				<h3>Chcesz zobaczyć więcej treści?</h3>
+				<p>Sprawdź wpisy na blogu i poznaj moje podejście do pracy z danymi.</p>
+				<Button href="/blog" label="Czytaj bloga" variant="secondary" />
+			</div>
+		</div>
+	</section>
+</PageLayout>
+
+<style>
+	.hero {
+		padding-top: 2rem;
+	}
+	.hero-grid {
+		display: grid;
+		grid-template-columns: 1.2fr 0.8fr;
+		gap: 2rem;
+		align-items: center;
+	}
+	.hero-copy {
+		padding: 3rem 0;
+	}
+	.hero-lead {
+		font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+		color: var(--color-muted);
+		margin-bottom: 1.5rem;
+	}
+	.hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+		margin-bottom: 1.5rem;
+	}
+	.hero-pills {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	.hero-pills li {
+		padding: 0.5rem 0.85rem;
+		border-radius: 999px;
+		background: rgba(91, 34, 23, 0.06);
+		border: 1px solid rgba(91, 34, 23, 0.08);
+		color: var(--color-primary);
+		font-weight: 600;
+	}
+	.hero-visual {
+		position: relative;
+		padding: 1.5rem;
+		min-height: 420px;
+		background: linear-gradient(135deg, rgba(91,34,23,0.05), rgba(240,138,60,0.08));
+	}
+	.chart-panel {
+		background: rgba(255,255,255,0.4);
+		border: 1px solid var(--color-border);
+		border-radius: 22px;
+		padding: 1rem;
+		margin-bottom: 1rem;
+	}
+	.chart-labels {
+		display: flex;
+		justify-content: space-between;
+		color: var(--color-muted);
+		font-size: 0.8rem;
+		margin-bottom: 0.6rem;
+	}
+	.bars {
+		display: flex;
+		align-items: end;
+		gap: 0.9rem;
+		height: 200px;
+	}
+	.bars span {
+		display: block;
+		flex: 1;
+		border-radius: 12px 12px 0 0;
+		background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-primary) 100%);
+	}
+	.mini-stat {
+		display: inline-block;
+		padding: 1rem 1.1rem;
+		background: rgba(255, 255, 255, 0.72);
+		border: 1px solid var(--color-border);
+		border-radius: 16px;
+		margin-right: 0.75rem;
+	}
+	.mini-stat.alt {
+		background: rgba(245, 194, 91, 0.18);
+	}
+	.mini-stat p,
+	.mini-stat span {
+		margin: 0;
+		font-size: 0.8rem;
+		color: var(--color-muted);
+	}
+	.mini-stat strong {
+		display: block;
+		font-size: 1.8rem;
+		margin: 0.3rem 0;
+	}
+	.split-intro {
+		display: grid;
+		grid-template-columns: 1fr 1.1fr;
+		gap: 2rem;
+		align-items: end;
+	}
+	.section-heading {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-bottom: 1.5rem;
+		align-items: end;
+	}
+	.inline-heading {
+		align-items: center;
+	}
+	.pill-grid,
+	.card-grid {
+		display: grid;
+		gap: 1.5rem;
+	}
+	.pill-grid {
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+	}
+	.info-card {
+		padding: 1.2rem;
+	}
+	.three-up {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+	.project-card,
+	.article-card {
+		overflow: hidden;
+	}
+	.project-cover img,
+	.article-cover img {
+		width: 100%;
+		height: 220px;
+		object-fit: cover;
+		border-radius: 0;
+	}
+	.article-card-body,
+	.project-body {
+		padding: 1.2rem;
+	}
+	.project-links {
+		display: flex;
+		gap: 0.8rem;
+		margin-top: 1rem;
+	}
+	.project-links a {
+		font-weight: 700;
+		color: var(--color-primary);
+	}
+	.youtube-callout {
+		display: grid;
+		grid-template-columns: 1.1fr 1fr auto;
+		gap: 1rem;
+		padding: 2rem;
+		align-items: center;
+	}
+	.cta-row {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1.5rem;
+	}
+	.cta-box {
+		padding: 1.6rem;
+	}
+	@media (max-width: 900px) {
+		.hero-grid,
+		.split-intro,
+		.youtube-callout,
+		.three-up,
+		.pill-grid,
+		.cta-row {
+			grid-template-columns: 1fr;
+		}
+		.section-heading,
+		.inline-heading {
+			display: block;
+		}
+	}
+</style>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">dbt incremental models</title>
+  <desc id="desc">Warm data-themed illustration with a layered dashboard and code styling.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f2e7d7"/>
+      <stop offset="100%" stop-color="#ead3bc"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#7a2e2e"/>
+      <stop offset="100%" stop-color="#4d1e1c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="100" y="85" width="1000" height="460" rx="28" fill="#fff8f0" opacity="0.9"/>
+  <rect x="145" y="128" width="420" height="38" rx="10" fill="#d49a5f" opacity="0.45"/>
+  <rect x="145" y="188" width="320" height="18" rx="9" fill="#d9c7b0"/>
+  <rect x="145" y="224" width="350" height="18" rx="9" fill="#d9c7b0"/>
+  <rect x="145" y="260" width="280" height="18" rx="9" fill="#d9c7b0"/>
+  <g>
+    <rect x="635" y="130" width="350" height="170" rx="20" fill="url(#panel)"/>
+    <path d="M690 249 L760 206 L834 238 L905 185 L955 218" fill="none" stroke="#f3b26d" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="690" cy="249" r="8" fill="#f3b26d"/>
+    <circle cx="760" cy="206" r="8" fill="#f3b26d"/>
+    <circle cx="834" cy="238" r="8" fill="#f3b26d"/>
+    <circle cx="905" cy="185" r="8" fill="#f3b26d"/>
+    <circle cx="955" cy="218" r="8" fill="#f3b26d"/>
+    <rect x="700" y="160" width="120" height="16" rx="8" fill="#f0d9b6" opacity="0.9"/>
+    <rect x="840" y="160" width="100" height="16" rx="8" fill="#f0d9b6" opacity="0.7"/>
+  </g>
+  <g>
+    <rect x="145" y="348" width="460" height="140" rx="18" fill="#efe0d0"/>
+    <rect x="175" y="381" width="190" height="22" rx="11" fill="#7a2e2e" opacity="0.92"/>
+    <rect x="175" y="420" width="240" height="18" rx="9" fill="#b8a08d"/>
+    <rect x="175" y="448" width="210" height="18" rx="9" fill="#b8a08d"/>
+  </g>
+  <g>
+    <rect x="660" y="340" width="325" height="150" rx="18" fill="#f5efe7"/>
+    <rect x="690" y="374" width="175" height="18" rx="9" fill="#d49a5f"/>
+    <rect x="690" y="407" width="215" height="18" rx="9" fill="#c8b6a0"/>
+    <rect x="690" y="440" width="150" height="18" rx="9" fill="#c8b6a0"/>
+  </g>
+</svg>

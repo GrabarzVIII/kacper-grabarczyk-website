@@ -1,0 +1,81 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout title="O mnie | Kacper Grabarczyk" description="Krótko o Kacperze Grabarczyku, jego podejściu do danych i technologi." pageName="O mnie">
+	<section class="section">
+		<div class="container prose-box">
+			<p class="section-kicker">Kim jestem</p>
+			<h1>Data specialist z ciekawością do narzędzi, procesu i jakości danych.</h1>
+			<p>
+				Jestem Kacper Grabarczyk. Moje zainteresowania koncentrują się wokół analityki danych,
+				inżynierii danych, SQL, Python i BI. W pracy cenię prostą, czytelną logikę, dobry proces i
+				dane, które pomagają podejmować lepsze decyzje.
+			</p>
+			<p>
+				Ta strona jest miejscem, w którym będę prezentował myśli, podejście do pracy z danymi,
+				narzędzia, które wykorzystuję oraz przykłady moich projektów. Wersja MVP ma charakter neutralny
+				i gotowy na późniejsze uzupełnienie prawdziwymi treściami.
+			</p>
+			<div class="two-col">
+				<div class="card info-card">
+					<h3>Czym się zajmuję</h3>
+					<ul>
+						<li>Analiza danych i insight generation</li>
+						<li>SQL i transformacje danych</li>
+						<li>Python i automatyzacja procesów</li>
+						<li>BI i dashboarding</li>
+					</ul>
+				</div>
+				<div class="card info-card">
+					<h3>Technologie</h3>
+					<ul>
+						<li>SQL</li>
+						<li>Python</li>
+						<li>dbt</li>
+						<li>Power BI</li>
+					</ul>
+				</div>
+			</div>
+			<div class="card info-card">
+				<h3>Moje podejście do danych</h3>
+				<p>
+					Dane powinny być zrozumiałe, użyteczne i wspierać decyzje biznesowe. W praktyce dążę do tego,
+					żeby rozwiązania były nie tylko poprawne technicznie, ale też czytelne dla zespołów korzystających
+					z wyników analizy.
+				</p>
+			</div>
+			<div class="card info-card">
+				<h3>DaneDaneTech</h3>
+				<p>
+					To mój kanał technologiczno-analityczny, na którym omawiam SQL, Python, BI, inżynierię danych i
+					praktyczne problemy, z którymi mierzę się w codziennym data work.
+				</p>
+			</div>
+		</div>
+	</section>
+</PageLayout>
+
+<style>
+	.prose-box {
+		max-width: 920px;
+	}
+	.two-col {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1.25rem;
+		margin: 1.5rem 0;
+	}
+	.info-card {
+		padding: 1.5rem;
+	}
+	ul {
+		padding-left: 1.2rem;
+		margin-bottom: 0;
+	}
+	@media (max-width: 760px) {
+		.two-col {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

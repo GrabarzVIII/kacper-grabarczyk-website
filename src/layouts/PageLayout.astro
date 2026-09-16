@@ -1,0 +1,29 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+
+interface Props {
+	title: string;
+	description: string;
+	pageName?: string;
+}
+
+const { title, description, pageName } = Astro.props;
+---
+
+<!doctype html>
+<html lang="pl">
+	<head>
+		<BaseHead title={title} description={description} />
+	</head>
+	<body>
+		<a class="skip-link" href="#main-content">Przejdź do treści</a>
+		<Header />
+		<main id="main-content">
+			{pageName && <div class="page-heading container"><p class="section-kicker">{pageName}</p></div>}
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>

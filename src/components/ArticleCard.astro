@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from './FormattedDate.astro';
+import Tag from './Tag.astro';
+
+interface Props {
+	post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, date, tags, cover } = post.data;
+---
+
+<article class="card article-card">
+	{cover && (
+		<a href={`/blog/${post.id}/`} class="article-cover">
+			<Image src={cover} alt={title} width={900} height={500} />
+		</a>
+	)}
+	<div class="article-card-body">
+		<div class="meta-list compact">
+			<FormattedDate date={date} />
+		</div>
+		<h3><a href={`/blog/${post.id}/`}>{title}</a></h3>
+		<p>{description}</p>
+		<div class="tag-list small">
+			{tags.map((tag) => <Tag label={tag} />)}
+		</div>
+	</div>
+</article>

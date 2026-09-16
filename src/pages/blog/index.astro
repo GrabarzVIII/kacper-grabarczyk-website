@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import ArticleCard from '../../components/ArticleCard.astro';
+import PageLayout from '../../layouts/PageLayout.astro';
+
+const posts = (await getCollection('blog')).filter((post) => !post.data.draft).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<PageLayout title="Blog | Kacper Grabarczyk" description="Blog techniczny o SQL, Pythonie, danych, BI i inżynierii danych." pageName="Blog">
+	<section class="section">
+		<div class="container">
+			<div class="section-heading">
+				<div>
+					<p class="section-kicker">Blog</p>
+					<h1>Artykuły o danych i technologii</h1>
+				</div>
+			</div>
+			<div class="card-grid three-up">
+				{posts.map((post) => <ArticleCard post={post} />)}
+			</div>
+		</div>
+	</section>
+</PageLayout>
+
+<style>
+	.card-grid {
+		display: grid;
+		gap: 1.5rem;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+	@media (max-width: 900px) {
+		.card-grid {
+			display: block;
+		}
+		.card-grid > :global(*) + :global(*) {
+			margin-top: 1.5rem;
+		}
+	}
+</style>

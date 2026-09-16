@@ -1,0 +1,24 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout title="404 | Kacper Grabarczyk" description="Strona nie została znaleziona." pageName="404">
+	<section class="section">
+		<div class="container not-found">
+			<h1>404</h1>
+			<p>Ta strona nie istnieje albo została przeniesiona.</p>
+			<a class="button primary" href="/">Wróć na stronę główną</a>
+		</div>
+	</section>
+</PageLayout>
+
+<style>
+	.not-found {
+		text-align: center;
+		padding: 5rem 0;
+	}
+	.not-found h1 {
+		font-size: clamp(4rem, 12vw, 8rem);
+		margin-bottom: 1rem;
+	}
+</style>

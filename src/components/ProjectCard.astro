@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import Tag from './Tag.astro';
+
+interface Props {
+	project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, description, technologies, cover, githubUrl, demoUrl } = project.data;
+---
+
+<article class="card project-card">
+	{cover && (
+		<div class="project-cover">
+			<Image src={cover} alt={title} width={900} height={540} />
+		</div>
+	)}
+	<div class="project-body">
+		<div class="tag-list small">
+			{technologies.map((tech) => <Tag label={tech} />)}
+		</div>
+		<h3>{title}</h3>
+		<p>{description}</p>
+		<div class="project-links">
+			{githubUrl && <a href={githubUrl} target="_blank" rel="noreferrer">GitHub</a>}
+			{demoUrl && <a href={demoUrl} target="_blank" rel="noreferrer">Demo</a>}
+		</div>
+	</div>
+</article>

@@ -1,0 +1,52 @@
+---
+import Button from './Button.astro';
+
+const techPills = ['Data Analysis', 'Data Engineering', 'SQL', 'Python', 'BI / Data Visualization'];
+---
+
+<section class="hero">
+	<div class="container hero-grid">
+		<div class="hero-copy">
+			<p class="section-kicker">Data Specialist</p>
+			<h1>Kacper Grabarczyk</h1>
+			<p class="hero-lead">
+				Data Analysis · Data Engineering · SQL · Python · BI / Data Visualization
+			</p>
+			<div class="hero-actions">
+				<Button href="/portfolio" label="Zobacz portfolio" />
+				<Button href="/kontakt" label="Kontakt" variant="secondary" />
+			</div>
+			<ul class="hero-pills" aria-label="Obszary specjalizacji">
+				{techPills.map((item) => (
+					<li>{item}</li>
+				))}
+			</ul>
+		</div>
+		<div class="hero-visual card" aria-label="Ilustracja dashboardu i analityki danych">
+			<div class="chart-panel">
+				<div class="chart-labels">
+					<span>Q1</span>
+					<span>Q2</span>
+					<span>Q3</span>
+					<span>Q4</span>
+				</div>
+				<div class="bars" aria-hidden="true">
+					<span style="height: 35%"></span>
+					<span style="height: 48%"></span>
+					<span style="height: 68%"></span>
+					<span style="height: 86%"></span>
+				</div>
+			</div>
+			<div class="mini-stat">
+				<p>Pipeline health</p>
+				<strong>92%</strong>
+				<span>steady uplift</span>
+			</div>
+			<div class="mini-stat alt">
+				<p>Quality score</p>
+				<strong>+24%</strong>
+				<span>vs. previous period</span>
+			</div>
+		</div>
+	</div>
+</section>
