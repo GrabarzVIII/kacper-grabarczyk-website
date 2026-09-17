@@ -14,6 +14,6 @@ export const NAV_ITEMS = [
 	{ label: 'Start', href: '/' },
 	{ label: 'Portfolio', href: '/portfolio' },
 	{ label: 'Blog', href: '/blog' },
-	{ label: 'O mnie', href: '/o-mnie' },
+	{ label: 'O mnie', href: '/about' },
 	{ label: 'Kontakt', href: '/kontakt' },
 ];
