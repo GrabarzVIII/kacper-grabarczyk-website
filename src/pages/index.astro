@@ -15,9 +15,37 @@ const projects = (await getCollection('projects'))
 	.filter((project) => !project.data.draft)
 	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 	.slice(0, 3);
+
+const specializations = [
+	{
+		title: 'Business Intelligence',
+		description: 'Dashboardy, raporty i interpretacja danych wspierające decyzje biznesowe.',
+		icon: 'https://cdn.simpleicons.org/chartdotjs/5b2217',
+	},
+	{
+		title: 'ETL / ELT i API',
+		description: 'Integracje danych, procesy pobierania danych i automatyzacja przepływów.',
+		icon: 'https://cdn.simpleicons.org/googlecloud/5b2217',
+	},
+	{
+		title: 'SQL i BigQuery',
+		description: 'Relacyjne bazy danych, pipeline’y oraz dane analityczne w BigQuery.',
+		icon: 'https://cdn.simpleicons.org/googlebigquery/5b2217',
+	},
+	{
+		title: 'Python i pandas',
+		description: 'Analiza danych, transformacje i automatyzacja zadań analitycznych.',
+		icon: 'https://cdn.simpleicons.org/python/5b2217',
+	},
+	{
+		title: 'Jakość danych i AI',
+		description: 'Walidacja, monitoring oraz workflow RAG, LLM i n8n.',
+		icon: 'https://cdn.simpleicons.org/n8n/5b2217',
+	},
+];
 ---
 
-<PageLayout title="Data Specialist | Kacper Grabarczyk" description="Profil zawodowy, portfolio i blog techniczny Kacpra Grabarczyka — BI, integracje danych, SQL, Python i automatyzacja." pageName="Start">
+<PageLayout title="Data Specialist | Kacper Grabarczyk" description="Profil zawodowy, portfolio i blog techniczny Kacpra Grabarczyka — BI, integracje danych, SQL, Python i automatyzacja.">
 	<Hero />
 
 	<section class="section section-tint">
@@ -25,7 +53,7 @@ const projects = (await getCollection('projects'))
 			<div class="split-intro">
 				<div>
 					<p class="section-kicker">Kim jestem</p>
-					<h2>Pomagam firmom zamieniać dane w decyzje.</h2>
+					<h2>Dostarczam rozwiązania od surowych danych do decyzji biznesowych</h2>
 				</div>
 				<p>
 					Pracuję na styku Business Intelligence, integracji danych i automatyzacji. Łączę SQL, Python,
@@ -37,16 +65,18 @@ const projects = (await getCollection('projects'))
 
 	<section class="section">
 		<div class="container">
-			<div class="section-heading">
+			<div class="section-heading specialization-heading">
 				<p class="section-kicker">Specjalizacja</p>
 				<h2>Obszary, w których działam</h2>
 			</div>
 			<div class="pill-grid">
-				<div class="card info-card"><h3>Business Intelligence</h3><p>Raporty, dashboardy i interpretacja danych wspierające decyzje biznesowe.</p></div>
-				<div class="card info-card"><h3>ETL / ELT i API</h3><p>Integracje danych, procesy pobierania danych i automatyzacja przepływów.</p></div>
-				<div class="card info-card"><h3>SQL i BigQuery</h3><p>Praca z relacyjnymi bazami danych, pipeline'ami oraz danymi analitycznymi.</p></div>
-				<div class="card info-card"><h3>Python i pandas</h3><p>Analiza danych, transformacje oraz automatyzacja zadań analitycznych.</p></div>
-				<div class="card info-card"><h3>Jakość danych i AI</h3><p>Walidacja danych, monitoring oraz rozwój workflow RAG, LLM i n8n.</p></div>
+				{specializations.map((specialization) => (
+					<div class="card info-card">
+						<img class="specialization-icon" src={specialization.icon} alt="" loading="lazy" />
+						<h3>{specialization.title}</h3>
+						<p>{specialization.description}</p>
+					</div>
+				))}
 			</div>
 		</div>
 	</section>
@@ -116,7 +146,19 @@ const projects = (await getCollection('projects'))
 		padding-top: 2rem;
 	}
 	.hero-content {
-		max-width: 900px;
+		max-width: var(--content-max);
+	}
+	.hero-heading {
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+	}
+	.hero-logo {
+		width: clamp(4.5rem, 8vw, 7rem);
+		height: clamp(4.5rem, 8vw, 7rem);
+		object-fit: contain;
+		flex: 0 0 auto;
+		border-radius: 0;
 	}
 	.hero-copy {
 		padding: 3rem 0;
@@ -140,6 +182,15 @@ const projects = (await getCollection('projects'))
 		margin-bottom: 1.5rem;
 		align-items: end;
 	}
+	.specialization-heading {
+		display: grid;
+		grid-template-columns: 1fr 2fr;
+		align-items: end;
+	}
+	.specialization-heading h2 {
+		margin: 0;
+		max-width: 620px;
+	}
 	.inline-heading {
 		align-items: center;
 	}
@@ -153,6 +204,13 @@ const projects = (await getCollection('projects'))
 	}
 	.info-card {
 		padding: 1.2rem;
+		min-height: 245px;
+	}
+	.specialization-icon {
+		width: 2.2rem;
+		height: 2.2rem;
+		margin-bottom: 1.25rem;
+		border-radius: 0;
 	}
 	.three-up {
 		grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -208,6 +266,9 @@ const projects = (await getCollection('projects'))
 		.inline-heading {
 			display: block;
 		}
+		.specialization-heading {
+			display: block;
+		}
 		.hero-copy {
 			padding: 2rem 0 1rem;
 		}
@@ -218,6 +279,14 @@ const projects = (await getCollection('projects'))
 		}
 		.hero-copy {
 			padding-top: 1rem;
+		}
+		.hero-heading {
+			align-items: flex-start;
+			gap: 0.8rem;
+		}
+		.hero-logo {
+			width: 3.8rem;
+			height: 3.8rem;
 		}
 	}
 </style>
