@@ -7,6 +7,7 @@
 			<div class="hero-copy">
 				<h1>
 					<a class="hero-title-link" href="/about" aria-label="O mnie: Data Specialist">
+						<img class="hero-logo" src="/logo-mono.png" alt="" />
 						<span>Data Specialist</span>
 					</a>
 				</h1>
@@ -15,3 +16,19 @@
 		</div>
 	</div>
 </section>
+
+<style>
+	.hero-title-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.18em;
+		color: inherit;
+	}
+	.hero-logo {
+		width: 1em;
+		height: 1em;
+		flex: 0 0 1em;
+		object-fit: contain;
+		border-radius: 0;
+	}
+</style>
