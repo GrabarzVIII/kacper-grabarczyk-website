@@ -143,19 +143,20 @@ const specializations = [
 
 <style>
 	.hero {
-		padding-top: 2rem;
+		padding-top: 1rem;
 	}
 	.hero-content {
 		max-width: var(--content-max);
 	}
 	.hero-heading {
 		display: flex;
-		align-items: center;
-		gap: 0.8rem;
+		align-items: flex-start;
+		gap: 0.65rem;
 	}
 	.hero-logo {
-		width: clamp(2.75rem, 4vw, 4rem);
-		height: clamp(2.75rem, 4vw, 4rem);
+		width: 2.5rem;
+		height: 2.5rem;
+		margin-top: 0.8rem;
 		object-fit: contain;
 		flex: 0 0 auto;
 		border-radius: 0;
@@ -205,6 +206,8 @@ const specializations = [
 	.info-card {
 		padding: 1.2rem;
 		min-height: 245px;
+		display: flex;
+		flex-direction: column;
 	}
 	.specialization-icon {
 		width: 2.2rem;
@@ -258,9 +261,11 @@ const specializations = [
 		.split-intro,
 		.youtube-callout,
 		.three-up,
-		.pill-grid,
 		.cta-row {
 			grid-template-columns: 1fr;
+		}
+		.pill-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
 		.section-heading,
 		.inline-heading {
@@ -285,8 +290,12 @@ const specializations = [
 			gap: 0.6rem;
 		}
 		.hero-logo {
-			width: 2.6rem;
-			height: 2.6rem;
+			width: 2rem;
+			height: 2rem;
+			margin-top: 0.55rem;
+		}
+		.pill-grid {
+			grid-template-columns: 1fr;
 		}
 	}
 </style>
