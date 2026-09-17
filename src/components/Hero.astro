@@ -4,51 +4,50 @@
 <section class="hero">
 	<div class="container hero-content">
 		<div class="hero-heading">
-			<div class="hero-copy">
+			<a class="hero-title-link" href="/about" aria-label="O mnie: Data Specialist, Kacper Grabarczyk">
 				<h1>
-					<a class="hero-title-link" href="/about" aria-label="O mnie: Data Specialist">
-						<img class="hero-logo" src="/logo-mono.png" alt="" />
-						<span>Data Specialist</span>
-						<span class="click-cue" aria-hidden="true">→</span>
-					</a>
+					<img class="hero-logo" src="/logo-mono.png" alt="" />
+					<span>Data Specialist</span>
 				</h1>
 				<p class="hero-name">Kacper Grabarczyk</p>
-			</div>
+			</a>
 		</div>
 	</div>
 </section>
 
 <style>
 	.hero-title-link {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.18em;
+		display: block;
+		width: fit-content;
+		padding: 0.35rem 0.5rem 0.5rem;
+		margin: -0.35rem 0 0 -0.5rem;
 		color: inherit;
 		text-decoration: none;
-		transition: color 0.2s ease;
+		border: 1px solid transparent;
+		border-radius: var(--radius-sm);
+		transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 	}
 	.hero-title-link:hover,
 	.hero-title-link:focus-visible {
 		color: var(--color-primary);
+		border-color: var(--color-primary);
+		background: rgba(91, 34, 23, 0.035);
 	}
 	.hero-title-link:focus-visible {
 		text-decoration: underline;
 		text-underline-offset: 0.12em;
 	}
-	.click-cue {
-		display: inline-block;
-		width: auto;
-		height: auto;
-		flex: 0 0 auto;
-		line-height: 1;
-		font-size: 0.55em;
-		color: var(--color-primary);
-		transform: translateX(0);
-		transition: transform 0.2s ease;
+	.hero-title-link h1 {
+		display: flex;
+		align-items: center;
+		gap: 0.18em;
+		margin-bottom: 0.08em;
 	}
-	.hero-title-link:hover .click-cue,
-	.hero-title-link:focus-visible .click-cue {
-		transform: translateX(0.16em);
+	.hero-name {
+		margin: 0;
+		font-size: clamp(1.25rem, 2vw, 1.8rem);
+		font-weight: 600;
+		color: var(--color-muted);
 	}
 	.hero-logo {
 		width: 1em;
