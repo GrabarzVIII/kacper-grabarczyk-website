@@ -49,18 +49,20 @@ const specializations = [
 	<Hero />
 
 	<section class="section section-tint">
-		<div class="container">
-			<div class="split-intro">
-				<div>
-					<p class="section-kicker">Kim jestem</p>
-					<h2>Dostarczam rozwiązania od surowych danych do decyzji biznesowych</h2>
+		<a class="about-section-link" href="/about" aria-label="O mnie: poznaj moje doświadczenie i podejście do danych">
+			<div class="container about-section-inner">
+				<div class="split-intro">
+					<div>
+						<p class="section-kicker">Kim jestem</p>
+						<h2>Dostarczam rozwiązania od surowych danych do decyzji biznesowych</h2>
+					</div>
+					<p>
+						Pracuję na styku Business Intelligence, integracji danych i automatyzacji. Łączę SQL, Python,
+						ETL/ELT, API oraz narzędzia BI, aby porządkować dane, wspierać raportowanie i ułatwiać podejmowanie decyzji.
+					</p>
 				</div>
-				<p>
-					Pracuję na styku Business Intelligence, integracji danych i automatyzacji. Łączę SQL, Python,
-					ETL/ELT, API oraz narzędzia BI, aby porządkować dane, wspierać raportowanie i ułatwiać podejmowanie decyzji.
-				</p>
 			</div>
-		</div>
+		</a>
 	</section>
 
 	<section class="section">
@@ -161,6 +163,25 @@ const specializations = [
 		grid-template-columns: 1fr 1.1fr;
 		gap: 2rem;
 		align-items: end;
+	}
+	.about-section-link {
+		display: block;
+		color: inherit;
+		text-decoration: none;
+	}
+	.about-section-inner {
+		padding: 1.5rem;
+		border: 1px solid transparent;
+		border-radius: var(--radius-md);
+		transition: border-color 0.2s ease, background 0.2s ease;
+	}
+	.about-section-link:hover .about-section-inner,
+	.about-section-link:focus-visible .about-section-inner {
+		border-color: var(--color-primary);
+		background: rgba(255, 248, 242, 0.62);
+	}
+	.about-section-link:focus-visible {
+		outline: none;
 	}
 	.section-heading {
 		display: flex;
