@@ -17,7 +17,7 @@ const projects = (await getCollection('projects'))
 	.slice(0, 3);
 ---
 
-<PageLayout title="Kacper Grabarczyk | Data Specialist" description="Portfolio, blog techniczny i wizytówka Kacpera Grabarczyka — analityka danych, inżynieria danych i BI." pageName="Start">
+<PageLayout title="Data Specialist | Kacper Grabarczyk" description="Profil zawodowy, portfolio i blog techniczny Kacpra Grabarczyka — BI, integracje danych, SQL, Python i automatyzacja." pageName="Start">
 	<Hero />
 
 	<section class="section section-tint">
@@ -28,9 +28,8 @@ const projects = (await getCollection('projects'))
 					<h2>Pomagam firmom zamieniać dane w decyzje.</h2>
 				</div>
 				<p>
-					Jestem Kacper Grabarczyk, data specialist z zainteresowaniem do analityki, inżynierii danych,
-					SQL, Python i visual storytelling. Na tej stronie prezentuję swoje zainteresowania, realizacje,
-					wpisy techniczne i podejście do pracy z danymi.
+					Pracuję na styku Business Intelligence, integracji danych i automatyzacji. Łączę SQL, Python,
+					ETL/ELT, API oraz narzędzia BI, aby porządkować dane, wspierać raportowanie i ułatwiać podejmowanie decyzji.
 				</p>
 			</div>
 		</div>
@@ -43,11 +42,11 @@ const projects = (await getCollection('projects'))
 				<h2>Obszary, w których działam</h2>
 			</div>
 			<div class="pill-grid">
-				<div class="card info-card"><h3>Data Analysis</h3><p>Badanie danych, analizowanie trendów, budowanie wniosków i rekomendacji.</p></div>
-				<div class="card info-card"><h3>Data Engineering</h3><p>Tworzenie niezawodnych procesów ETL/ELT i struktur danych wspierających analitykę.</p></div>
-				<div class="card info-card"><h3>SQL</h3><p>Modelowanie, optymalizacja, analityka zapytań i rozwiązywanie problemów biznesowych na danych.</p></div>
-				<div class="card info-card"><h3>Python</h3><p>Automatyzacja, transformacje, przetwarzanie i narzędzia wspierające warstwę analityczną.</p></div>
-				<div class="card info-card"><h3>BI & Visualization</h3><p>Przygotowanie czytelnych dashboardów, raportów i storytelling data-driven.</p></div>
+				<div class="card info-card"><h3>Business Intelligence</h3><p>Raporty, dashboardy i interpretacja danych wspierające decyzje biznesowe.</p></div>
+				<div class="card info-card"><h3>ETL / ELT i API</h3><p>Integracje danych, procesy pobierania danych i automatyzacja przepływów.</p></div>
+				<div class="card info-card"><h3>SQL i BigQuery</h3><p>Praca z relacyjnymi bazami danych, pipeline'ami oraz danymi analitycznymi.</p></div>
+				<div class="card info-card"><h3>Python i pandas</h3><p>Analiza danych, transformacje oraz automatyzacja zadań analitycznych.</p></div>
+				<div class="card info-card"><h3>Jakość danych i AI</h3><p>Walidacja danych, monitoring oraz rozwój workflow RAG, LLM i n8n.</p></div>
 			</div>
 		</div>
 	</section>
@@ -116,11 +115,8 @@ const projects = (await getCollection('projects'))
 	.hero {
 		padding-top: 2rem;
 	}
-	.hero-grid {
-		display: grid;
-		grid-template-columns: 1.2fr 0.8fr;
-		gap: 2rem;
-		align-items: center;
+	.hero-content {
+		max-width: 900px;
 	}
 	.hero-copy {
 		padding: 3rem 0;
@@ -130,25 +126,6 @@ const projects = (await getCollection('projects'))
 		font-size: clamp(1.25rem, 2vw, 1.8rem);
 		font-weight: 600;
 		color: var(--color-muted);
-	}
-	.hero-actions {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 1rem;
-		margin-bottom: 1.5rem;
-	}
-	.hero-logo {
-		display: grid;
-		place-items: center;
-		min-height: 360px;
-		padding: 2rem;
-		background: var(--color-surface);
-	}
-	.hero-logo img {
-		width: min(100%, 360px);
-		max-height: 360px;
-		object-fit: contain;
-		border-radius: 0;
 	}
 	.split-intro {
 		display: grid;
@@ -220,7 +197,6 @@ const projects = (await getCollection('projects'))
 		padding: 1.6rem;
 	}
 	@media (max-width: 900px) {
-		.hero-grid,
 		.split-intro,
 		.youtube-callout,
 		.three-up,
@@ -235,9 +211,6 @@ const projects = (await getCollection('projects'))
 		.hero-copy {
 			padding: 2rem 0 1rem;
 		}
-		.hero-logo {
-			min-height: 280px;
-		}
 	}
 	@media (max-width: 520px) {
 		.hero {
@@ -245,13 +218,6 @@ const projects = (await getCollection('projects'))
 		}
 		.hero-copy {
 			padding-top: 1rem;
-		}
-		.hero-actions .button {
-			width: 100%;
-		}
-		.hero-logo {
-			min-height: 240px;
-			padding: 1.25rem;
 		}
 	}
 </style>
