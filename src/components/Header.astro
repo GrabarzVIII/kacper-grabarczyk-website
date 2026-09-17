@@ -5,9 +5,8 @@ import HeaderLink from './HeaderLink.astro';
 
 <header class="site-header">
 	<div class="container nav-wrap">
-		<a class="brand" href="/">
-			<span class="brand-mark">DDT</span>
-			<span>{SITE_TITLE}</span>
+		<a class="brand" href="/" aria-label={SITE_TITLE}>
+			<img class="brand-mark" src="/logo.svg" alt="" />
 		</a>
 		<nav aria-label="Główna nawigacja" class="main-nav">
 			{NAV_ITEMS.map((item) => <HeaderLink href={item.href}>{item.label}</HeaderLink>)}
@@ -43,15 +42,11 @@ import HeaderLink from './HeaderLink.astro';
 		letter-spacing: -0.03em;
 	}
 	.brand-mark {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: 2.25rem;
-		height: 2.25rem;
-		border-radius: 0.8rem;
-		background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-		color: white;
-		font-size: 0.78rem;
+		display: block;
+		width: 2.7rem;
+		height: 2.7rem;
+		border-radius: 0;
+		object-fit: contain;
 	}
 	.main-nav {
 		display: flex;
@@ -79,7 +74,7 @@ import HeaderLink from './HeaderLink.astro';
 		color: white;
 		font-weight: 700;
 	}
-	@media (max-width: 760px) {
+	@media (max-width: 900px) {
 		.nav-wrap {
 			padding: 0.75rem 0;
 			flex-wrap: wrap;
@@ -89,6 +84,14 @@ import HeaderLink from './HeaderLink.astro';
 			overflow-x: auto;
 			width: 100%;
 			padding-bottom: 0.4rem;
+		}
+	}
+	@media (max-width: 520px) {
+		.nav-actions {
+			display: none;
+		}
+		.brand {
+			font-size: 0.95rem;
 		}
 	}
 </style>

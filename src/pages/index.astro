@@ -20,7 +20,7 @@ const projects = (await getCollection('projects'))
 <PageLayout title="Kacper Grabarczyk | Data Specialist" description="Portfolio, blog techniczny i wizytówka Kacpera Grabarczyka — analityka danych, inżynieria danych i BI." pageName="Start">
 	<Hero />
 
-	<section class="section">
+	<section class="section section-tint">
 		<div class="container">
 			<div class="split-intro">
 				<div>
@@ -52,7 +52,7 @@ const projects = (await getCollection('projects'))
 		</div>
 	</section>
 
-	<section class="section">
+	<section class="section section-tint">
 		<div class="container">
 			<div class="section-heading inline-heading">
 				<div>
@@ -82,7 +82,7 @@ const projects = (await getCollection('projects'))
 		</div>
 	</section>
 
-	<section class="section">
+	<section class="section section-tint">
 		<div class="container youtube-callout card">
 			<div>
 				<p class="section-kicker">DaneDaneTech</p>
@@ -125,10 +125,11 @@ const projects = (await getCollection('projects'))
 	.hero-copy {
 		padding: 3rem 0;
 	}
-	.hero-lead {
-		font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+	.hero-name {
+		margin: -1rem 0 2rem;
+		font-size: clamp(1.25rem, 2vw, 1.8rem);
+		font-weight: 600;
 		color: var(--color-muted);
-		margin-bottom: 1.5rem;
 	}
 	.hero-actions {
 		display: flex;
@@ -136,75 +137,18 @@ const projects = (await getCollection('projects'))
 		gap: 1rem;
 		margin-bottom: 1.5rem;
 	}
-	.hero-pills {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.75rem;
-		list-style: none;
-		padding: 0;
-		margin: 0;
+	.hero-logo {
+		display: grid;
+		place-items: center;
+		min-height: 360px;
+		padding: 2rem;
+		background: var(--color-surface);
 	}
-	.hero-pills li {
-		padding: 0.5rem 0.85rem;
-		border-radius: 999px;
-		background: rgba(91, 34, 23, 0.06);
-		border: 1px solid rgba(91, 34, 23, 0.08);
-		color: var(--color-primary);
-		font-weight: 600;
-	}
-	.hero-visual {
-		position: relative;
-		padding: 1.5rem;
-		min-height: 420px;
-		background: linear-gradient(135deg, rgba(91,34,23,0.05), rgba(240,138,60,0.08));
-	}
-	.chart-panel {
-		background: rgba(255,255,255,0.4);
-		border: 1px solid var(--color-border);
-		border-radius: 22px;
-		padding: 1rem;
-		margin-bottom: 1rem;
-	}
-	.chart-labels {
-		display: flex;
-		justify-content: space-between;
-		color: var(--color-muted);
-		font-size: 0.8rem;
-		margin-bottom: 0.6rem;
-	}
-	.bars {
-		display: flex;
-		align-items: end;
-		gap: 0.9rem;
-		height: 200px;
-	}
-	.bars span {
-		display: block;
-		flex: 1;
-		border-radius: 12px 12px 0 0;
-		background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-primary) 100%);
-	}
-	.mini-stat {
-		display: inline-block;
-		padding: 1rem 1.1rem;
-		background: rgba(255, 255, 255, 0.72);
-		border: 1px solid var(--color-border);
-		border-radius: 16px;
-		margin-right: 0.75rem;
-	}
-	.mini-stat.alt {
-		background: rgba(245, 194, 91, 0.18);
-	}
-	.mini-stat p,
-	.mini-stat span {
-		margin: 0;
-		font-size: 0.8rem;
-		color: var(--color-muted);
-	}
-	.mini-stat strong {
-		display: block;
-		font-size: 1.8rem;
-		margin: 0.3rem 0;
+	.hero-logo img {
+		width: min(100%, 360px);
+		max-height: 360px;
+		object-fit: contain;
+		border-radius: 0;
 	}
 	.split-intro {
 		display: grid;
@@ -287,6 +231,27 @@ const projects = (await getCollection('projects'))
 		.section-heading,
 		.inline-heading {
 			display: block;
+		}
+		.hero-copy {
+			padding: 2rem 0 1rem;
+		}
+		.hero-logo {
+			min-height: 280px;
+		}
+	}
+	@media (max-width: 520px) {
+		.hero {
+			padding-top: 0;
+		}
+		.hero-copy {
+			padding-top: 1rem;
+		}
+		.hero-actions .button {
+			width: 100%;
+		}
+		.hero-logo {
+			min-height: 240px;
+			padding: 1.25rem;
 		}
 	}
 </style>
