@@ -120,6 +120,12 @@ small,
 	padding: var(--space-16) 0;
 }
 
+.section-tint {
+	background: rgba(255, 248, 242, 0.48);
+	border-top: 1px solid rgba(91, 34, 23, 0.06);
+	border-bottom: 1px solid rgba(91, 34, 23, 0.06);
+}
+
 .section-title {
 	margin-bottom: 1rem;
 }
@@ -278,5 +284,10 @@ hr {
 
 	.section {
 		padding: 3.5rem 0;
+	}
+
+	.section-tint {
+		margin-inline: -0.5rem;
+		padding-inline: 0.5rem;
 	}
 }
