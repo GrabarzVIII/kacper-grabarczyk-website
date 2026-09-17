@@ -61,6 +61,7 @@ const specializations = [
 						ETL/ELT, API oraz narzędzia BI, aby porządkować dane, wspierać raportowanie i ułatwiać podejmowanie decyzji.
 					</p>
 				</div>
+				<span class="about-section-cue" aria-hidden="true">Poznaj mnie <span>→</span></span>
 			</div>
 		</a>
 	</section>
@@ -170,15 +171,48 @@ const specializations = [
 		text-decoration: none;
 	}
 	.about-section-inner {
+		position: relative;
 		padding: 1.5rem;
 		border: 1px solid transparent;
 		border-radius: var(--radius-md);
 		transition: border-color 0.2s ease, background 0.2s ease;
 	}
+	.about-section-cue {
+		position: absolute;
+		top: 1.5rem;
+		right: 1.5rem;
+		color: var(--color-primary);
+		font-size: 0.8rem;
+		font-weight: 700;
+		opacity: 0;
+		transform: translateX(-0.35rem);
+		transition: opacity 0.2s ease, transform 0.2s ease;
+	}
+	.about-section-cue span {
+		display: inline-block;
+		transition: transform 0.2s ease;
+	}
 	.about-section-link:hover .about-section-inner,
 	.about-section-link:focus-visible .about-section-inner {
 		border-color: var(--color-primary);
 		background: rgba(255, 248, 242, 0.62);
+	}
+	.about-section-link:hover .about-section-cue,
+	.about-section-link:focus-visible .about-section-cue {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	.about-section-link:hover .about-section-cue span,
+	.about-section-link:focus-visible .about-section-cue span {
+		transform: translateX(0.2rem);
+	}
+	.about-section-link:hover .section-kicker,
+	.about-section-link:focus-visible .section-kicker {
+		color: var(--color-accent);
+	}
+	.about-section-link:hover h2,
+	.about-section-link:focus-visible h2 {
+		color: var(--color-primary);
 	}
 	.about-section-link:focus-visible {
 		outline: none;
