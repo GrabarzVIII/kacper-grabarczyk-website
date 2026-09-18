@@ -8,6 +8,7 @@ const blog = defineCollection({
 		z.object({
 			title: z.string(),
 			description: z.string(),
+			category: z.enum(['dane', 'geek', 'ai']),
 			date: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
 			tags: z.array(z.string()).default([]),
@@ -18,7 +19,7 @@ const blog = defineCollection({
 });
 
 const projects = defineCollection({
-	loader: glob({ base: './src/content/projects', pattern: '**/*.md' }),
+	loader: glob({ base: './src/content/projects', pattern: '**/*.{md,mdx}' }),
 	schema: ({ image }) =>
 		z.object({
 			title: z.string(),
@@ -27,6 +28,7 @@ const projects = defineCollection({
 			tags: z.array(z.string()).default([]),
 			technologies: z.array(z.string()).default([]),
 			featured: z.boolean().default(false),
+			featuredOrder: z.number().int().positive().default(100),
 			cover: image().optional(),
 			githubUrl: z.string().url().optional().or(z.literal('')),
 			demoUrl: z.string().url().optional().or(z.literal('')),

@@ -1,56 +1,78 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+
+const experience = [
+	{
+		company: 'Digitalsharks',
+		role: 'Data Specialist',
+		period: '08.2025 – obecnie · B2B',
+		description: 'Łączę dane marketingowe z API, rozwijam procesy w BigQuery i dashboardy w Looker Studio. Buduję automatyzacje (Python, n8n) od pobierania danych, obsługę oraz dostarczanie ich biznesowi. Dbam o walidację danych i monitoring procesów.',
+	},
+	{
+		company: 'UNIQA Polska',
+		role: 'Business Intelligence Analyst / Consultant',
+		period: '03.2024 – 02.2026',
+		description: 'Rozwijałem raportowanie zarządcze, procesy ETL i środowiska bazodanowe. Najpierw jako analityk, a następnie konsultant wspierałem zespoły biznesowe w ocenie jakości i interpretacji danych oraz doborze rozwiązań raportowych.',
+		context: 'Analityk: 03.2024–10.2025, pełen etat · Konsultant: 11.2025–02.2026, B2B, część etatu',
+	},
+	{
+		company: 'Addit',
+		role: 'Inżynier procesu produkcyjnego i jakości',
+		period: '07.2020 – 02.2024 · pełen etat',
+		description: 'Wdrażałem projekty montażowe, analizowałem przyczyny problemów jakościowych i opracowywałem działania zapobiegawcze. Współpraca z produkcją i klientami nauczyła mnie patrzeć na rozwiązania przez pryzmat całego procesu.',
+	},
+];
 ---
 
-<PageLayout title="O mnie | Kacper Grabarczyk" description="Krótko o Kacperze Grabarczyku, jego podejściu do danych i technologi." pageName="O mnie">
+<PageLayout title="O mnie | Kacper Grabarczyk" description="Od inżynierii procesu produkcyjnego do danych. Kacper Grabarczyk — Business Intelligence, integracje API i automatyzacja procesów w n8n." pageName="O mnie">
 	<section class="section">
 		<div class="container prose-box">
 			<p class="section-kicker">Kim jestem</p>
-			<h1>Data specialist z ciekawością do narzędzi, procesu i jakości danych.</h1>
+			<h1>Kacper Grabarczyk</h1>
+			<p class="about-lead">Od inżynierii procesu do danych i automatyzacji.</p>
 			<p>
-				Jestem Kacper Grabarczyk. Moje zainteresowania koncentrują się wokół analityki danych,
-				inżynierii danych, SQL, Python i BI. W pracy cenię prostą, czytelną logikę, dobry proces i
-				dane, które pomagają podejmować lepsze decyzje.
+				Przebranżowiłem się z inżyniera procesu produkcyjnego i jakości w kierunku analityki
+				i inżynierii danych. Zachowałem przy tym podejście zdobyte podczas pracy jako inżynier w fabryce: zrozumieć proces,
+				znaleźć przyczynę problemu i zaprojektować rozwiązanie, które sprawdza się w codziennej pracy.
 			</p>
 			<p>
-				Ta strona jest miejscem, w którym będę prezentował myśli, podejście do pracy z danymi,
-				narzędzia, które wykorzystuję oraz przykłady moich projektów. Wersja MVP ma charakter neutralny
-				i gotowy na późniejsze uzupełnienie prawdziwymi treściami.
+				Dziś jako Data Specialist łączę Business Intelligence, integracje API i automatyzację.
+				Tworzę automatyzacje w n8n, rozwijam przepływy danych (Dataform, BigQuery, Python)
+				i raporty wspierające decyzje biznesowe. Zaczynam od potrzeb zespołu, a technologię
+				dobieram do zadania, z myślą o jakości danych i łatwym utrzymaniu rozwiązania.
 			</p>
-			<div class="two-col">
-				<div class="card info-card">
-					<h3>Czym się zajmuję</h3>
-					<ul>
-						<li>Analiza danych i insight generation</li>
-						<li>SQL i transformacje danych</li>
-						<li>Python i automatyzacja procesów</li>
-						<li>BI i dashboarding</li>
-					</ul>
-				</div>
-				<div class="card info-card">
-					<h3>Technologie</h3>
-					<ul>
-						<li>SQL</li>
-						<li>Python</li>
-						<li>dbt</li>
-						<li>Power BI</li>
-					</ul>
-				</div>
-			</div>
+			<section class="profile-section" aria-labelledby="experience-heading">
+				<h2 id="experience-heading">Doświadczenie zawodowe</h2>
+				<ol class="experience-list">
+					{experience.map((item) => (
+						<li class="card info-card">
+							<p class="section-kicker">{item.company}</p>
+							<h3>{item.role}</h3>
+							<p class="experience-period">{item.period}</p>
+							<p>{item.description}</p>
+							{item.context && <p class="experience-context">{item.context}</p>}
+						</li>
+					))}
+				</ol>
+			</section>
+			<section class="profile-section" aria-labelledby="volunteering-heading">
+				<h2 id="volunteering-heading">Dane także w projektach społecznych</h2>
+				<p>Wolontariacko, jako Data Team Lead w <strong>Zosia AI</strong>, koordynuję rozwój bazy wiedzy
+					RAG i pracę nad wiarygodnością odpowiedzi. Wcześniej wspierałem <strong>Fundację K.I.D.S.</strong>
+					przy bazie danych szpitali i raportowaniu w Power BI.</p>
+			</section>
 			<div class="card info-card">
-				<h3>Moje podejście do danych</h3>
+				<h2>Porozmawiajmy o Twoich procesach</h2>
 				<p>
-					Dane powinny być zrozumiałe, użyteczne i wspierać decyzje biznesowe. W praktyce dążę do tego,
-					żeby rozwiązania były nie tylko poprawne technicznie, ale też czytelne dla zespołów korzystających
-					z wyników analizy.
+					Jeśli chcesz połączyć rozproszone dane, usprawnić raportowanie lub zautomatyzować
+					powtarzalne zadania w n8n, porozmawiajmy o tym, jak pracuje Twój zespół
+					i gdzie potrzebuje wsparcia.
 				</p>
-			</div>
-			<div class="card info-card">
-				<h3>DaneDaneTech</h3>
-				<p>
-					To mój kanał technologiczno-analityczny, na którym omawiam SQL, Python, BI, inżynierię danych i
-					praktyczne problemy, z którymi mierzę się w codziennym data work.
-				</p>
+				<div class="profile-actions">
+					<a class="button profile-button" href="/kontakt">Porozmawiajmy</a>
+					<a class="button profile-button" href="/portfolio">Zobacz projekty</a>
+					<a class="button profile-button" href="/blog">Czytaj bloga</a>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -60,6 +82,44 @@ import PageLayout from '../layouts/PageLayout.astro';
 	.prose-box {
 		max-width: 920px;
 	}
+	.profile-section { margin: 3rem 0; }
+	.experience-list { list-style: none; padding: 0; display: grid; gap: 1rem; }
+	.experience-period { color: var(--color-muted); font-size: 0.9rem; }
+	.profile-section .info-card + .info-card { margin-top: 1rem; }
+	.experience-list .info-card + .info-card { margin-top: 0; }
+	.info-card p:last-child { margin-bottom: 0; }
+	.profile-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+	.profile-button {
+		padding: 0.65rem 0.9rem;
+		border: 1px solid var(--color-primary);
+		background: var(--color-primary);
+		color: white;
+		cursor: pointer;
+		transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+	}
+	.profile-button:hover,
+	.profile-button:focus-visible {
+		background: var(--color-surface);
+		color: var(--color-primary);
+		transform: translateY(-2px);
+		box-shadow: 0 5px 12px rgba(91, 34, 23, 0.18);
+	}
+	.profile-button:focus-visible {
+		outline: 3px solid var(--color-primary);
+		outline-offset: 4px;
+	}
+	.profile-button:active {
+		background: var(--color-surface-strong);
+		transform: translateY(0) scale(0.98);
+		box-shadow: none;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.profile-button:hover,
+		.profile-button:focus-visible,
+		.profile-button:active {
+			transform: none;
+		}
+	}
 	.two-col {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -68,6 +128,16 @@ import PageLayout from '../layouts/PageLayout.astro';
 	}
 	.info-card {
 		padding: 1.5rem;
+	}
+	.info-card h2 {
+		font-size: 1.4rem;
+	}
+	.prose-box > .info-card + .info-card {
+		margin-top: 1.25rem;
+	}
+	.about-lead {
+		font-size: 1.3rem;
+		color: var(--color-primary);
 	}
 	ul {
 		padding-left: 1.2rem;

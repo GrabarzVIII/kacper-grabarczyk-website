@@ -11,7 +11,7 @@ const currentYear = new Date().getFullYear();
 		</div>
 		<nav aria-label="Social media" class="footer-links">
 			<a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer">GitHub</a>
-			<a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+			{SOCIAL_LINKS.linkedin && <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>}
 			<a href={SOCIAL_LINKS.youtube} target="_blank" rel="noreferrer">YouTube / DaneDaneTech</a>
 		</nav>
 		<p class="footer-copy">© {currentYear} Kacper Grabarczyk.</p>
@@ -44,6 +44,20 @@ const currentYear = new Date().getFullYear();
 	.footer-links a,
 	.footer-copy {
 		color: var(--color-muted);
+	}
+	.footer-links a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
+		text-decoration: underline;
+		text-underline-offset: 0.2em;
+	}
+	.footer-links a:hover {
+		color: var(--color-primary);
+	}
+	.footer-copy {
+		margin: 0;
+		font-size: 0.85rem;
 	}
 	@media (max-width: 700px) {
 		.footer-inner {

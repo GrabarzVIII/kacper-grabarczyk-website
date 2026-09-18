@@ -4,6 +4,7 @@ import { Image } from 'astro:assets';
 import PageLayout from '../../layouts/PageLayout.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Tag from '../../components/Tag.astro';
+import { BLOG_CATEGORIES } from '../../data/blog';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
@@ -19,21 +20,24 @@ const { post } = Astro.props;
 const { Content, headings } = await render(post);
 const formattedDate = post.data.date;
 const updatedDate = post.data.updatedDate ?? null;
+const tocHeadings = headings.filter((heading) => heading.depth > 1 && heading.depth < 4);
 ---
 
 <PageLayout title={post.data.title} description={post.data.description} pageName="Blog">
 	<article class="article-page">
 		<header class="article-header container">
-			<p class="section-kicker">Artykuł</p>
+			<a class="back-link text-link" href="/blog">← Wszystkie artykuły</a>
 			<h1>{post.data.title}</h1>
 			<p class="lead">{post.data.description}</p>
 			<div class="article-meta">
+				<a class="text-link" href={`/blog/kategoria/${post.data.category}/`}>{BLOG_CATEGORIES[post.data.category].label}</a>
+				<span aria-hidden="true"> · </span>
 				<FormattedDate date={formattedDate} />
 				{updatedDate && <span>· zaktualizowano <FormattedDate date={updatedDate} /></span>}
 			</div>
-			<ul class="tag-list">
+			<div class="tag-list">
 				{post.data.tags.map((tag) => <Tag label={tag} />)}
-			</ul>
+			</div>
 			{post.data.cover && (
 				<div class="article-cover-wrap">
 					<Image src={post.data.cover} alt={post.data.title} width={1600} height={900} />
@@ -41,19 +45,18 @@ const updatedDate = post.data.updatedDate ?? null;
 			)}
 		</header>
 
-		<div class="article-layout container">
-			<aside class="toc card" aria-label="Spis treści">
+		<div class:list={["article-layout container", { "without-toc": tocHeadings.length === 0 }]}>
+			{tocHeadings.length > 0 && <aside class="toc card" aria-label="Spis treści">
 				<h2>Spis treści</h2>
 				<ul>
-					{headings
-						.filter((heading) => heading.depth > 1 && heading.depth < 4)
+					{tocHeadings
 						.map((heading) => (
 						<li class={`depth-${heading.depth}`}>
 							<a href={`#${heading.slug}`}>{heading.text}</a>
 						</li>
 					))}
 				</ul>
-			</aside>
+			</aside>}
 			<div class="article-content prose">
 				<Content />
 			</div>
@@ -62,6 +65,13 @@ const updatedDate = post.data.updatedDate ?? null;
 </PageLayout>
 
 <style>
+	.back-link {
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
+		margin-bottom: 1rem;
+		font-size: 0.9rem;
+	}
 	.article-page {
 		padding-top: 2rem;
 	}
@@ -89,10 +99,16 @@ const updatedDate = post.data.updatedDate ?? null;
 		gap: 2rem;
 		align-items: start;
 	}
+	.article-layout.without-toc {
+		grid-template-columns: minmax(0, 760px);
+		justify-content: center;
+	}
 	.toc {
 		padding: 1.2rem;
 		position: sticky;
-		top: 90px;
+		top: 100px;
+		max-height: calc(100vh - 120px);
+		overflow-y: auto;
 	}
 	.toc h2 {
 		font-size: 1rem;
@@ -107,6 +123,12 @@ const updatedDate = post.data.updatedDate ?? null;
 	}
 	.toc a {
 		color: var(--color-muted);
+		display: block;
+		padding-block: 0.4rem;
+	}
+	.toc a:hover {
+		color: var(--color-primary);
+		text-decoration: underline;
 	}
 	.depth-3 {
 		margin-left: 0.9rem;
@@ -115,28 +137,13 @@ const updatedDate = post.data.updatedDate ?? null;
 		max-width: 760px;
 		line-height: 1.75;
 	}
-	.prose h2,
-	.prose h3 {
-		margin-top: 2.5rem;
-	}
-	.prose ul,
-	.prose ol {
-		padding-left: 1.3rem;
-	}
-	.prose a {
-		color: var(--color-primary);
-		text-decoration: underline;
-		text-underline-offset: 0.14em;
-	}
-	.prose img {
-		margin: 2rem 0;
-	}
 	@media (max-width: 980px) {
 		.article-layout {
 			display: block;
 		}
 		.toc {
 			position: static;
+			max-height: none;
 			margin-bottom: 1.5rem;
 		}
 	}

@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import { BLOG_CATEGORIES, type BlogCategory } from '../data/blog';
+
+interface Props { active?: BlogCategory; }
+const { active } = Astro.props;
+const posts = await getCollection('blog', ({ data }) => !data.draft);
+---
+
+<nav class="blog-categories" aria-label="Sekcje bloga">
+	<a href="/blog" aria-current={!active ? 'page' : undefined}>Wszystkie <span>({posts.length})</span></a>
+	{Object.entries(BLOG_CATEGORIES).map(([id, category]) => (
+		<a href={`/blog/kategoria/${id}/`} aria-current={active === id ? 'page' : undefined}>
+			{category.label} <span>({posts.filter((post) => post.data.category === id).length})</span>
+		</a>
+	))}
+</nav>
+
+<style>
+	.blog-categories {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-block: 1.5rem 2rem;
+	}
+	a {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		min-height: 44px;
+		padding: 0.55rem 1rem;
+		border: 1px solid var(--color-border);
+		border-radius: 999px;
+		font-weight: 600;
+	}
+	a:hover { background: var(--color-surface-strong); }
+	a[aria-current="page"] { background: var(--color-primary); color: white; }
+	span { font-size: 0.85em; }
+</style>

@@ -11,6 +11,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "typecheck": "astro check",
+    "test": "node --experimental-strip-types --test tests/projects.test.mjs",
     "lint": "astro check",
     "astro": "astro"
   },

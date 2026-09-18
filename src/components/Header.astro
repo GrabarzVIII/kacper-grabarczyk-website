@@ -6,7 +6,7 @@ import HeaderLink from './HeaderLink.astro';
 <header class="site-header">
 	<div class="container nav-wrap">
 		<a class="brand" href="/" aria-label={SITE_TITLE}>
-			<img class="brand-mark" src="/logo-mono.png" alt="" />
+			<img class="brand-mark" src="/logo-mono.png" alt="" width="44" height="44" />
 		</a>
 		<nav aria-label="Główna nawigacja" class="main-nav">
 			{NAV_ITEMS.map((item) => <HeaderLink href={item.href}>{item.label}</HeaderLink>)}
@@ -55,19 +55,10 @@ import HeaderLink from './HeaderLink.astro';
 		justify-content: center;
 		gap: 0.6rem;
 	}
-	.main-nav a {
-		padding: 0.5rem 0.8rem;
-		border-radius: 999px;
-		font-weight: 600;
-		color: var(--color-muted);
-	}
-	.main-nav a.active,
-	.main-nav a:hover,
-	.main-nav a:focus-visible {
-		background: rgba(91, 34, 23, 0.06);
-		color: var(--color-text);
-	}
 	.nav-youtube {
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
 		padding: 0.65rem 0.9rem;
 		border-radius: 999px;
 		border: 1px solid var(--color-primary);
@@ -82,20 +73,28 @@ import HeaderLink from './HeaderLink.astro';
 		color: var(--color-primary);
 	}
 	@media (max-width: 900px) {
+		.site-header {
+			position: relative;
+		}
 		.nav-wrap {
 			padding: 0.75rem 0;
 			flex-wrap: wrap;
 		}
 		.main-nav {
+			order: 3;
 			justify-content: flex-start;
-			overflow-x: auto;
+			gap: 0.2rem;
 			width: 100%;
 			padding-bottom: 0.4rem;
 		}
 	}
 	@media (max-width: 520px) {
-		.nav-actions {
-			display: none;
+		.main-nav {
+			justify-content: center;
+		}
+		.nav-youtube {
+			font-size: 0.85rem;
+			padding: 0.5rem 0.7rem;
 		}
 		.brand {
 			font-size: 0.95rem;

@@ -10,7 +10,7 @@ const links = [
 ---
 
 <ul class="social-list">
-	{links.map((link) => (
+	{links.filter((link) => link.href).map((link) => (
 		<li>
 			<a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noreferrer' : undefined}>
 				{link.label}

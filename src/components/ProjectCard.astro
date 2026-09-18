@@ -5,9 +5,10 @@ import Tag from './Tag.astro';
 
 interface Props {
 	project: CollectionEntry<'projects'>;
+	headingLevel?: 'h2' | 'h3';
 }
 
-const { project } = Astro.props;
+const { project, headingLevel: Heading = 'h3' } = Astro.props;
 const { title, description, technologies, cover, githubUrl, demoUrl } = project.data;
 ---
 
@@ -21,11 +22,63 @@ const { title, description, technologies, cover, githubUrl, demoUrl } = project.
 		<div class="tag-list small">
 			{technologies.map((tech) => <Tag label={tech} />)}
 		</div>
-		<h3>{title}</h3>
+		<Heading><a class="project-title" href={`/portfolio/${project.id}/`}>{title}</a></Heading>
 		<p>{description}</p>
 		<div class="project-links">
+			<a href={`/portfolio/${project.id}/`} aria-label={`Poznaj projekt: ${title}`}>Poznaj projekt →</a>
 			{githubUrl && <a href={githubUrl} target="_blank" rel="noreferrer">GitHub</a>}
 			{demoUrl && <a href={demoUrl} target="_blank" rel="noreferrer">Demo</a>}
 		</div>
 	</div>
 </article>
+
+<style>
+	.project-card {
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+	}
+	.project-card:focus-within, .project-card:hover {
+		border-color: var(--color-primary);
+	}
+	.project-title:hover {
+		text-decoration: underline;
+		text-underline-offset: 0.15em;
+	}
+	.project-cover :global(img) {
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+		border-radius: 0;
+	}
+	.project-body {
+		padding: 1.5rem;
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+	}
+	h2, h3 {
+		font-size: 1.4rem;
+		margin-top: 1.2rem;
+		line-height: 1.35;
+	}
+	p {
+		color: var(--color-muted);
+		font-size: 1rem;
+	}
+	.project-links {
+		margin-top: auto;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+	.project-links a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
+		color: var(--color-primary);
+		font-weight: 700;
+		text-decoration: underline;
+		text-underline-offset: 0.2em;
+	}
+</style>

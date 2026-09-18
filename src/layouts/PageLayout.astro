@@ -9,7 +9,7 @@ interface Props {
 	pageName?: string;
 }
 
-const { title, description, pageName } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>
@@ -20,8 +20,7 @@ const { title, description, pageName } = Astro.props;
 	<body>
 		<a class="skip-link" href="#main-content">Przejdź do treści</a>
 		<Header />
-		<main id="main-content">
-			{pageName && <div class="page-heading container"><p class="section-kicker">{pageName}</p></div>}
+		<main id="main-content" tabindex="-1">
 			<slot />
 		</main>
 		<Footer />

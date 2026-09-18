@@ -5,42 +5,40 @@ import Button from '../components/Button.astro';
 import Hero from '../components/Hero.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import PageLayout from '../layouts/PageLayout.astro';
+import { selectFeaturedProjects } from '../lib/projects';
 
 const posts = (await getCollection('blog'))
 	.filter((post) => !post.data.draft)
 	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 	.slice(0, 3);
 
-const projects = (await getCollection('projects'))
-	.filter((project) => !project.data.draft)
-	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-	.slice(0, 3);
+const projects = selectFeaturedProjects(await getCollection('projects'));
 
 const specializations = [
 	{
 		title: 'Business Intelligence',
-		description: 'Dashboardy, raporty i interpretacja danych wspierające decyzje biznesowe.',
-		icon: 'https://cdn.simpleicons.org/chartdotjs/5b2217',
+		description: 'Dashboardy w Looker Studio, raportowanie zarządcze i analizy danych marketingowych.',
+		icon: 'M4 4v16h16 M8 16v-5 M12 16V7 M16 16v-8',
 	},
 	{
 		title: 'ETL / ELT i API',
-		description: 'Integracje danych, procesy pobierania danych i automatyzacja przepływów.',
-		icon: 'https://cdn.simpleicons.org/googlecloud/5b2217',
+		description: 'Pobieranie danych z API platform marketingowych oraz rozwój i utrzymanie procesów integracji.',
+		icon: 'M4 7h15l-4-4 M20 17H5l4 4 M19 7l-4 4 M5 17l4-4',
 	},
 	{
 		title: 'SQL i BigQuery',
-		description: 'Relacyjne bazy danych, pipeline’y oraz dane analityczne w BigQuery.',
-		icon: 'https://cdn.simpleicons.org/googlebigquery/5b2217',
+		description: 'Budowa i optymalizacja przepływów danych w BigQuery, ekstrakty danych oraz walidacja i monitoring.',
+		icon: 'M4 6c0-4 16-4 16 0s-16 4-16 0v12c0 4 16 4 16 0V6 M4 12c0 4 16 4 16 0',
 	},
 	{
-		title: 'Python i pandas',
-		description: 'Analiza danych, transformacje i automatyzacja zadań analitycznych.',
-		icon: 'https://cdn.simpleicons.org/python/5b2217',
+		title: 'RAG i bazy wiedzy',
+		description: 'Rozwój bazy wiedzy w wolontariacie Zosia AI oraz prywatne projekty agentów korzystających ze źródeł.',
+		icon: 'M8 6l-6 6 6 6 M16 6l6 6-6 6 M14 3l-4 18',
 	},
 	{
 		title: 'Automatyzacja i n8n',
-		description: 'Automatyzacja procesów operacyjnych i analitycznych, integracje oraz workflow n8n.',
-		icon: 'https://cdn.simpleicons.org/n8n/5b2217',
+		description: 'Przepływy operacyjne i analityczne, pozyskiwanie leadów oraz automatyczne dostarczanie ich do klientów.',
+		icon: 'M3 3h6v6H3z M15 15h6v6h-6z M9 6h9v9 M6 9v9h9',
 	},
 ];
 ---
@@ -57,8 +55,9 @@ const specializations = [
 						<h2>Dostarczam rozwiązania od surowych danych do decyzji biznesowych</h2>
 					</div>
 					<p>
-						Pracuję na styku Business Intelligence, integracji danych i automatyzacji. Łączę SQL, Python,
-						ETL/ELT, API oraz narzędzia BI, aby porządkować dane, wspierać raportowanie i ułatwiać podejmowanie decyzji.
+						Łączę doświadczenie w Business Intelligence, integracji danych i automatyzacji
+						z podejściem wyniesionym z inżynierii procesu produkcyjnego i jakości.
+						Dzięki temu patrzę na dane w kontekście całego procesu biznesowego i potrzeb zespołu.
 					</p>
 				</div>
 				<span class="about-section-cue" aria-hidden="true">Poznaj mnie <span>→</span></span>
@@ -70,12 +69,12 @@ const specializations = [
 		<div class="container">
 			<div class="section-heading specialization-heading">
 				<p class="section-kicker">Specjalizacja</p>
-				<h2>Obszary, w których działam</h2>
+				<h2>Dane i automatyzacja</h2>
 			</div>
 			<div class="pill-grid">
 				{specializations.map((specialization) => (
 					<div class="card info-card">
-						<img class="specialization-icon" src={specialization.icon} alt="" loading="lazy" />
+						<svg class="specialization-icon" viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={specialization.icon} /></svg>
 						<h3>{specialization.title}</h3>
 						<p>{specialization.description}</p>
 					</div>
@@ -84,20 +83,20 @@ const specializations = [
 		</div>
 	</section>
 
-	<section class="section section-tint">
+	{projects.length > 0 && <section class="section section-tint">
 		<div class="container">
 			<div class="section-heading inline-heading">
 				<div>
 					<p class="section-kicker">Portfolio</p>
 					<h2>Wybrane projekty</h2>
 				</div>
-				<Button href="/portfolio" label="Zobacz więcej" variant="secondary" />
+				<Button href="/portfolio" label="Zobacz portfolio" variant="secondary" />
 			</div>
 			<div class="card-grid three-up">
 				{projects.map((project) => <ProjectCard project={project} />)}
 			</div>
 		</div>
-	</section>
+	</section>}
 
 	<section class="section">
 		<div class="container">
@@ -131,12 +130,12 @@ const specializations = [
 	<section class="section">
 		<div class="container cta-row">
 			<div class="card cta-box">
-				<h3>Chcesz porozmawiać o danych?</h3>
+				<h2>Chcesz porozmawiać o danych?</h2>
 				<p>Jeśli potrzebujesz wsparcia w SQL, analityce, BI lub pipeline'ach danych — napisz.</p>
 				<Button href="/kontakt" label="Skontaktuj się" />
 			</div>
 			<div class="card cta-box">
-				<h3>Chcesz zobaczyć więcej treści?</h3>
+				<h2>Chcesz zobaczyć więcej treści?</h2>
 				<p>Sprawdź wpisy na blogu i poznaj moje podejście do pracy z danymi.</p>
 				<Button href="/blog" label="Czytaj bloga" variant="secondary" />
 			</div>
@@ -145,20 +144,6 @@ const specializations = [
 </PageLayout>
 
 <style>
-	.hero {
-		padding-top: 1rem;
-	}
-	.hero-content {
-		max-width: var(--content-max);
-	}
-	.hero-heading {
-		display: flex;
-		align-items: flex-start;
-		gap: 0.65rem;
-	}
-	.hero-copy {
-		padding: 3rem 0;
-	}
 	.split-intro {
 		display: grid;
 		grid-template-columns: 1fr 1.1fr;
@@ -178,14 +163,13 @@ const specializations = [
 		transition: border-color 0.2s ease, background 0.2s ease;
 	}
 	.about-section-cue {
-		position: absolute;
-		top: 1.5rem;
-		right: 1.5rem;
+		display: inline-block;
+		margin-top: 1rem;
 		color: var(--color-primary);
 		font-size: 0.8rem;
 		font-weight: 700;
-		opacity: 0;
-		transform: translateX(-0.35rem);
+		opacity: 1;
+		transform: translateX(0);
 		transition: opacity 0.2s ease, transform 0.2s ease;
 	}
 	.about-section-cue span {
@@ -208,7 +192,7 @@ const specializations = [
 	}
 	.about-section-link:hover .section-kicker,
 	.about-section-link:focus-visible .section-kicker {
-		color: var(--color-accent);
+		color: var(--color-primary);
 	}
 	.about-section-link:hover h2,
 	.about-section-link:focus-visible h2 {
@@ -225,9 +209,7 @@ const specializations = [
 		align-items: end;
 	}
 	.specialization-heading {
-		display: grid;
-		grid-template-columns: 1fr 2fr;
-		align-items: end;
+		display: block;
 	}
 	.specialization-heading h2 {
 		margin: 0;
@@ -242,46 +224,23 @@ const specializations = [
 		gap: 1.5rem;
 	}
 	.pill-grid {
-		grid-template-columns: repeat(5, minmax(0, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
 	}
 	.info-card {
 		padding: 1.2rem;
-		min-height: 245px;
+		min-height: 0;
 		display: flex;
 		flex-direction: column;
 	}
 	.specialization-icon {
+		color: var(--color-primary);
 		width: 2.2rem;
 		height: 2.2rem;
 		margin-bottom: 1.25rem;
 		border-radius: 0;
 	}
 	.three-up {
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-	}
-	.project-card,
-	.article-card {
-		overflow: hidden;
-	}
-	.project-cover img,
-	.article-cover img {
-		width: 100%;
-		height: 220px;
-		object-fit: cover;
-		border-radius: 0;
-	}
-	.article-card-body,
-	.project-body {
-		padding: 1.2rem;
-	}
-	.project-links {
-		display: flex;
-		gap: 0.8rem;
-		margin-top: 1rem;
-	}
-	.project-links a {
-		font-weight: 700;
-		color: var(--color-primary);
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
 	}
 	.youtube-callout {
 		display: grid;
@@ -295,13 +254,20 @@ const specializations = [
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 1.5rem;
 	}
+	.cta-box h2 {
+		font-size: 1.5rem;
+	}
+	.info-card p {
+		font-size: 0.95rem;
+		color: var(--color-muted);
+		margin-bottom: 0;
+	}
 	.cta-box {
 		padding: 1.6rem;
 	}
 	@media (max-width: 900px) {
 		.split-intro,
 		.youtube-callout,
-		.three-up,
 		.cta-row {
 			grid-template-columns: 1fr;
 		}
@@ -315,23 +281,27 @@ const specializations = [
 		.specialization-heading {
 			display: block;
 		}
-		.hero-copy {
-			padding: 2rem 0 1rem;
-		}
 	}
 	@media (max-width: 520px) {
-		.hero {
-			padding-top: 0;
-		}
-		.hero-copy {
-			padding-top: 1rem;
-		}
-		.hero-heading {
-			align-items: flex-start;
-			gap: 0.6rem;
-		}
 		.pill-grid {
 			grid-template-columns: 1fr;
+		}
+		.info-card {
+			display: grid;
+			grid-template-columns: 2rem minmax(0, 1fr);
+			column-gap: 1rem;
+			padding: 1rem;
+		}
+		.info-card h3 {
+			margin-bottom: 0.5rem;
+		}
+		.info-card p {
+			grid-column: 2;
+		}
+		.specialization-icon {
+			width: 2rem;
+			height: 2rem;
+			margin: 0;
 		}
 	}
 </style>

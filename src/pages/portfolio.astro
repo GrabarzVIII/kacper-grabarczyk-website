@@ -12,34 +12,29 @@ const projects = (await getCollection('projects')).filter((project) => !project.
 			<div class="section-heading">
 				<div>
 					<p class="section-kicker">Portfolio</p>
-					<h1>Projekty i case studies</h1>
+					<h1>Projekty prywatne</h1>
 				</div>
 			</div>
-			<p class="intro-copy">To jest wersja MVP. Na tym etapie głównym celem jest pokazanie struktury i przygotowanie miejsca na prawdziwe case studies.</p>
+			<p class="intro-copy">Prywatne projekty, w których łączę automatyzację w n8n, modele językowe i pracę ze źródłami danych. Każdy opis wskazuje zrealizowany zakres. Repozytoria są prywatne, a projekty nie mają publicznego demo.</p>
 			<div class="card-grid three-up">
-				{projects.map((project) => <ProjectCard project={project} />)}
+				{projects.map((project) => <ProjectCard project={project} headingLevel="h2" />)}
 			</div>
 		</div>
 	</section>
 </PageLayout>
 
 <style>
-	.intro-copy {
-		max-width: 720px;
-		margin-bottom: 2rem;
-		color: var(--color-muted);
-	}
-	.card-grid {
-		display: grid;
-		gap: 1.5rem;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-	}
-	@media (max-width: 900px) {
-		.card-grid {
-			display: block;
-		}
-		.card-grid > :global(*) + :global(*) {
-			margin-top: 1.5rem;
-		}
-	}
+.intro-copy {
+	max-width: 720px;
+	margin-bottom: 2rem;
+	color: var(--color-muted);
+}
+.card-grid {
+	display: grid;
+	gap: 1.5rem;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+}
+.section-heading {
+	margin-bottom: 2rem;
+}
 </style>

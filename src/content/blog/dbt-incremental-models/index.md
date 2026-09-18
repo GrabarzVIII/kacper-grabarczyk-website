@@ -2,6 +2,7 @@
 title: "dbt incremental models: kiedy używać i jak z nich korzystać"
 description: "Praktyczny przewodnik po modelach incremental w dbt z naciskiem na wydajność, jakość danych i utrzymywalność pipeline'ów."
 date: 2024-01-12
+category: dane
 tags: ["dbt", "SQL", "Data Engineering", "ELT"]
 cover: "./cover.svg"
 featured: true

@@ -3,29 +3,103 @@ import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import FormattedDate from './FormattedDate.astro';
 import Tag from './Tag.astro';
+import { BLOG_CATEGORIES } from '../data/blog';
 
 interface Props {
 	post: CollectionEntry<'blog'>;
+	headingLevel?: 'h2' | 'h3';
 }
 
-const { post } = Astro.props;
+const { post, headingLevel: Heading = 'h3' } = Astro.props;
 const { title, description, date, tags, cover } = post.data;
 ---
 
 <article class="card article-card">
 	{cover && (
-		<a href={`/blog/${post.id}/`} class="article-cover">
-			<Image src={cover} alt={title} width={900} height={500} />
-		</a>
+		<div class="article-cover">
+			<Image src={cover} alt="" width={900} height={506} loading="lazy" />
+		</div>
 	)}
 	<div class="article-card-body">
 		<div class="meta-list compact">
+			<span>{BLOG_CATEGORIES[post.data.category].label}</span>
 			<FormattedDate date={date} />
 		</div>
-		<h3><a href={`/blog/${post.id}/`}>{title}</a></h3>
+		<Heading><a href={`/blog/${post.id}/`}>{title}<span class="read-cue" aria-hidden="true">Czytaj artykuł →</span></a></Heading>
 		<p>{description}</p>
 		<div class="tag-list small">
 			{tags.map((tag) => <Tag label={tag} />)}
 		</div>
 	</div>
 </article>
+
+<style>
+	.article-card {
+		position: relative;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		transition: border-color 0.2s ease, box-shadow 0.2s ease;
+	}
+	.article-card:hover, .article-card:focus-within {
+		border-color: var(--color-primary);
+		box-shadow: var(--shadow-card);
+	}
+	.article-cover :global(img) {
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+		border-radius: 0;
+	}
+	.article-card-body {
+		padding: 1.5rem;
+		padding-bottom: 4rem;
+	}
+	.meta-list {
+		font-size: 0.85rem;
+		color: var(--color-muted);
+		margin-bottom: 0.8rem;
+	}
+	h2, h3 {
+		font-size: 1.4rem;
+		line-height: 1.35;
+	}
+	:is(h2, h3) a::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+	}
+	:is(h2, h3) a:focus-visible {
+		outline: none;
+	}
+	.article-card:focus-within {
+		outline: 3px solid var(--color-primary);
+		outline-offset: 4px;
+	}
+	p {
+		color: var(--color-muted);
+		font-size: 1rem;
+	}
+	.read-cue {
+		position: absolute;
+		bottom: 1.25rem;
+		left: 1.5rem;
+		color: var(--color-primary);
+		font-size: 0.9rem;
+		text-decoration: underline;
+		text-underline-offset: 0.2em;
+	}
+	@media (min-width: 700px) {
+		.article-card:only-child {
+			display: grid;
+			grid-template-columns: 1fr 1.2fr;
+		}
+		.article-card:only-child .article-cover :global(img) {
+			height: 100%;
+			object-fit: cover;
+		}
+		.article-card:only-child .read-cue {
+			left: calc(45.45% + 1.5rem);
+		}
+	}
+</style>

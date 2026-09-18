@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import ArticleCard from '../../components/ArticleCard.astro';
 import PageLayout from '../../layouts/PageLayout.astro';
+import BlogCategories from '../../components/BlogCategories.astro';
 
 const posts = (await getCollection('blog')).filter((post) => !post.data.draft).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
@@ -15,25 +16,27 @@ const posts = (await getCollection('blog')).filter((post) => !post.data.draft).s
 					<h1>Artykuły o danych i technologii</h1>
 				</div>
 			</div>
+			<BlogCategories />
+			{posts.length === 0 && <p class="intro-copy">Pierwsze artykuły pojawią się tutaj wkrótce.</p>}
 			<div class="card-grid three-up">
-				{posts.map((post) => <ArticleCard post={post} />)}
+				{posts.map((post) => <ArticleCard post={post} headingLevel="h2" />)}
 			</div>
 		</div>
 	</section>
 </PageLayout>
 
 <style>
-	.card-grid {
-		display: grid;
-		gap: 1.5rem;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-	}
-	@media (max-width: 900px) {
-		.card-grid {
-			display: block;
-		}
-		.card-grid > :global(*) + :global(*) {
-			margin-top: 1.5rem;
-		}
-	}
+.intro-copy {
+	max-width: 720px;
+	margin-bottom: 2rem;
+	color: var(--color-muted);
+}
+.card-grid {
+	display: grid;
+	gap: 1.5rem;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+}
+.section-heading {
+	margin-bottom: 2rem;
+}
 </style>

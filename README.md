@@ -9,8 +9,8 @@ This project is a lightweight static website for a data specialist profile. It i
 - home page with professional introduction,
 - portfolio section driven by content collections,
 - technical blog built with Astro Content Collections and Markdown,
-- about page with placeholders ready for future expansion,
-- contact page with placeholder links,
+- about page based on the professional profile,
+- contact page with professional links,
 - SEO basics: title, description, canonical, Open Graph, sitemap, RSS,
 - responsive and accessible design system based on the DaneDaneTech visual direction.
 
@@ -94,6 +94,7 @@ The post frontmatter should include:
 title: "Your title"
 description: "Short summary"
 date: 2024-01-12
+category: dane
 tags: ["SQL", "Python"]
 cover: ./cover.webp
 draft: false
@@ -104,12 +105,24 @@ featured: false
 Important rules:
 
 - `draft: true` hides the post from production builds.
+- `category` is required: `dane`, `geek` or `ai`. It selects the Dane, Geek or AI section.
+- `/blog` lists all published posts. Sections live at `/blog/kategoria/dane/`, `/blog/kategoria/geek/` and `/blog/kategoria/ai/`.
+- Category pages exist even when empty. Drafts are excluded from lists, counts, individual pages and RSS.
 - place related images next to the article folder.
 - prefer local images, not remote placeholders.
 
 ## Adding a project
 
-Create a Markdown file in `src/content/projects/`.
+Create a Markdown or MDX file in `src/content/projects/`. You can also use a folder with `index.md` and local images, just like a blog post:
+
+```text
+src/content/projects/
+  my-project/
+    index.md
+    cover.webp
+```
+
+The existing flat `.md` files still work. Do not create both `my-project.md` and `my-project/index.md`: they share the same URL.
 
 Example:
 
@@ -121,13 +134,54 @@ date: 2024-03-21
 tags: ["SQL", "Power BI"]
 technologies: ["SQL", "Power BI", "Python"]
 featured: true
+featuredOrder: 1
 draft: false
 githubUrl: "https://github.com/your-user/project"
 demoUrl: "https://example.com"
 ---
+
+## Cel projektu
+
+Describe the problem and context.
+
+## Rozwiązanie
+
+Describe your contribution, tools and implementation. Add local images using Markdown with descriptive alt text.
+
+## Efekt i dalszy rozwój
+
+Separate completed features from planned work.
 ```
 
-A project card will render automatically.
+A card and a full project page at `/portfolio/my-project/` are generated automatically. `description` is a short summary for the card; the Markdown body is the full project description. Optional `cover: ./cover.webp` adds a cover image. GitHub and demo links are optional; omit them for private projects. `draft: true` hides the project from the listing, landing page and individual routes.
+
+### Wybór projektów na stronie głównej
+
+W metadanych dwóch lub trzech wybranych projektów ustaw:
+
+```yaml
+featured: true
+featuredOrder: 1
+```
+
+- `featured: true` oznacza pokazanie projektu na landing page. `false` pozostawia go wyłącznie w portfolio.
+- Ustaw kolejno `featuredOrder: 1`, `2`, `3`. Mniejsza liczba oznacza wcześniejszą pozycję.
+- Landing pokazuje maksymalnie 3 opublikowane projekty. Jeśli wyróżnisz tylko 2, pokaże dokładnie 2.
+- Gdy wyróżnisz więcej, wybrane zostaną pierwsze 3 według kolejności. Przy remisie decyduje nowsza data, następnie identyfikator.
+- Domyślna kolejność to `100`. Brak wyróżnionych projektów ukrywa sekcję na stronie głównej.
+- Pełna lista portfolio zawiera wszystkie opublikowane projekty, od najnowszych.
+
+### Podsekcje bloga
+
+W metadanych wpisu ustaw jedną kategorię:
+
+```yaml
+category: dane # dane, geek albo ai
+```
+
+Kategoria decyduje o podsekcji; `tags` nadal służą do opisu technologii i tematów. Zmiana kategorii nie zmienia adresu artykułu `/blog/<slug>/`. Nie trzeba przenosić plików do katalogów kategorii.
+
+Test wyboru projektów: `npm test` (uruchamiany także w CI).
 
 ## Changing contact details
 
@@ -165,4 +219,3 @@ npm run build
 npm run preview
 npm run typecheck
 ```
-

@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import { SOCIAL_LINKS } from '../consts';
 ---
 
 <PageLayout title="Kontakt | Kacper Grabarczyk" description="Skontaktuj się z Kacperem Grabarczykiem." pageName="Kontakt">
@@ -8,12 +9,12 @@ import PageLayout from '../layouts/PageLayout.astro';
 			<div class="card contact-card">
 				<p class="section-kicker">Kontakt</p>
 				<h1>Dane, technologie i współpraca.</h1>
-				<p>Na tym etapie to prosty placeholder do późniejszego uzupełnienia realnymi linkami i danymi kontaktowymi.</p>
+				<p>Chcesz porozmawiać o raportowaniu BI, integracjach API lub automatyzacji w n8n? Napisz do mnie e-mail albo odezwij się na LinkedIn.</p>
 				<ul class="contact-list">
-					<li><strong>E-mail:</strong> TODO: uzupełnij adres e-mail</li>
-					<li><strong>LinkedIn:</strong> TODO: uzupełnij LinkedIn URL</li>
-					<li><strong>GitHub:</strong> TODO: uzupełnij GitHub URL</li>
-					<li><strong>YouTube:</strong> https://www.youtube.com/@DaneDaneTech</li>
+					<li><strong>E-mail</strong>{SOCIAL_LINKS.email ? <a class="text-link" href={SOCIAL_LINKS.email}>Napisz wiadomość →</a> : <span class="muted">Adres do uzupełnienia</span>}</li>
+					<li><strong>LinkedIn</strong>{SOCIAL_LINKS.linkedin ? <a class="text-link" href={SOCIAL_LINKS.linkedin}>Zobacz profil →</a> : <span class="muted">Profil do uzupełnienia</span>}</li>
+					<li><strong>GitHub</strong><a class="text-link" href={SOCIAL_LINKS.github}>GrabarzVIII →</a></li>
+					<li><strong>YouTube</strong><a class="text-link" href={SOCIAL_LINKS.youtube}>DaneDaneTech →</a></li>
 				</ul>
 			</div>
 		</div>
@@ -22,8 +23,23 @@ import PageLayout from '../layouts/PageLayout.astro';
 
 <style>
 	.contact-card {
-		padding: 2rem;
+		padding: clamp(1.25rem, 4vw, 3rem);
 		max-width: 760px;
+		margin-inline: auto;
+	}
+	.contact-list li {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 0.25rem 1rem;
+		padding: 0.75rem 0;
+		border-top: 1px solid var(--color-border);
+	}
+	.contact-list a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
 	}
 	.contact-list {
 		list-style: none;
